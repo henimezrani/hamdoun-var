@@ -1,0 +1,43 @@
+<div class="main-content"  >
+  <div class="container-fluid my ">
+      <div class="row">
+          <div class="col-md-6 mx-auto ">
+             
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Authentification</h4>
+                     
+                          <ul *ngIf="error" class="error">
+                          <li>{{error}} </li>
+                          <li> Pour plus d'informations, vous devez contacter votre administration </li>
+                        </ul> 
+                        <ul *ngIf="validation && !error" class="error">
+                                <li>{{validation}} </li>
+                              </ul>
+                        
+                  </div>
+                  <div class="card-body">
+                      <form (submit)="onLoginSubmit()">
+                        <div class="row">
+                          <div class="col-md-8">
+                           
+                              <input  placeholder="Email" type="email" [(ngModel)]="email" name="email">
+                            
+                          </div>
+                        </div> 
+                          <div class="row">
+                              <div class="col-md-8">
+                                
+                                  <input  placeholder="Mot De Passe" type="password" [(ngModel)]="password" name="password">
+                               
+                              </div>
+                          </div>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Connexion</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          </div>
+      </div>
+  </div>

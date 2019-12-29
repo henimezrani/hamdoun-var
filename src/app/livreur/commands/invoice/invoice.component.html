@@ -1,0 +1,88 @@
+
+
+    <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3" id="bill" style="background:white;margin-left:2%;margin-right:2%;">
+      
+      <div class="row">
+        <div class="text-center" style="margin:auto;">
+          <h1>
+            <img src="https://firebasestorage.googleapis.com/v0/b/fisfis-8dcda.appspot.com/o/Groupe%2047.png?alt=media&token=90f9f8d3-4daf-4b11-8b13-545e36e904c1" />
+          </h1>
+        </div>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>#</th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products">
+              <td class="col-md-9"><em>{{product.prod_name}}</em></td>
+              <td class="col-md-1" style="text-align: center"> {{product.prod_qte}} </td>
+              <td class="col-md-1 text-center">{{formatUserNumber(product.prod_unit_price)}} DT</td>
+              <td class="col-md-1 text-center">{{formatUserNumber(product.prod_unit_price*product.prod_qte)}} DT</td>
+            </tr>
+
+            <tr>
+              <td>   </td>
+              <td>   </td>
+              <td class="text-right">
+                <p>
+                  <strong>Subtotal: </strong>
+                </p>
+                <p>
+                  <strong>Shipping: </strong>
+                </p>
+              </td>
+              <td class="text-center">
+                <p>
+                  <strong>{{formatUserNumber(command.total)}} DT</strong>
+                </p>
+                <p>
+                  <strong>4 DT</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>   </td>
+              <td>   </td>
+              <td class="text-right">
+                <h4><strong>Total: </strong></h4>
+              </td>
+              <td class="text-center text-danger">
+                <h4><strong>{{formatUserNumber(command.total + 4000)}} DT</strong></h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+      <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6">
+            <address>
+              <strong>Fisfis</strong>
+              <br>
+              Jardin De Carthage
+              <br>
+              Tunis, Tunisie
+              <br>
+              <abbr title="Phone">P:</abbr> (216) 55-555-555
+            </address>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+            <p>
+              <em>Date: {{myDate}}</em>
+            </p>
+            <p>
+              <em>Receipt #: {{billId}}</em>
+            </p>
+          </div>
+        </div>
+    </div>
+  
+    <button type="button" (click)="printBill()" class="btn btn-success btn-lg btn-block well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+        Print   <span class="glyphicon glyphicon-chevron-right"></span>
+      </button>

@@ -1,0 +1,11 @@
+.logoutComp {
+    position: fixed;
+    bottom: 20px;
+    left: 15px;
+    cursor: pointer;
+}
+
+.logoutComp:hover {
+    background-color: rgba(255, 74, 86, 0.404);
+    border-radius: .25rem;
+}

@@ -1,0 +1,11 @@
+.body {
+    margin-top: 20px;
+    background:white;
+}
+p{
+    font-size:14px !important;
+}
+.row{
+    margin-left:3%;
+    margin-right:3%;
+}

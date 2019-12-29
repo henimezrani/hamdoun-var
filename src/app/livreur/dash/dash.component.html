@@ -1,0 +1,158 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+
+            </div>
+            <p class="card-category">Commands</p>
+            <h3 class="card-title">{{commandsLength}}
+              <small></small>
+            </h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              Commands
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+
+            </div>
+            <p class="card-category">Users</p>
+            <h3 class="card-title">{{usersLength}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              Users
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-danger card-header-icon">
+            <div class="card-icon">
+
+            </div>
+            <p class="card-category">Products</p>
+            <h3 class="card-title">{{productsLength}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              Prods
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-info card-header-icon">
+            <div class="card-icon">
+
+            </div>
+            <p class="card-category">Categories</p>
+            <h3 class="card-title">{{catsLength}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              Subcats:
+              {{subCatsLength}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-warning">
+            <div class="pull-left">
+              <h4 class="card-title">Last users</h4>
+
+              <p class="card-category">{{usersLength}} User</p>
+            </div>
+
+
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table table-hover">
+              <thead class="text-warning">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Zone</th>
+                <th>Phone Number</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of users.slice(0,4); let i=index">
+                  <td>{{i}}</td>
+                  <td>{{user.fname}} {{user.lname}}</td>
+                  <td>{{user.zone}}</td>
+                  <td>{{user.phone_number}}</td>
+                </tr>
+
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-warning">
+            <div class="pull-left">
+              <h4 class="card-title">Last commands</h4>
+
+              <p class="card-category">{{commandsLength}} Command</p>
+            </div>
+
+
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table table-hover">
+              <thead class="text-warning">
+                <!--'ID','Name', 'Zone', 'Total', 'Delievered','Promotion'-->
+                <th>ID</th>
+                <th>Name</th>
+                <th>Zone</th>
+                <th>Total</th>
+                <th>Delievered</th>
+                <th>Promotion</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of commands.slice(0,4);let i=index">
+                  <td>{{i}}</td>
+                  <td>{{row.name}}</td>
+                  <td>{{row.client_zone}}</td>
+                  <td>{{row.total}}</td>
+                  <td *ngIf="!row.canceled"><button type="button" [ngClass]="row.delievered?'btn-success':'btn-warning'"
+                      class="btn waves-effect"><span *ngIf="row.delievered">DELIEVERED</span><span *ngIf="!row.delievered">EN
+                        COURS</span></button></td>
+                  <td *ngIf="row.canceled"><button type="button" class="btn waves-effect btn-danger">CANCELED</button></td>
+                  <td *ngIf="row.isPromotion">Yes</td>
+                  <td *ngIf="!row.isPromotion">No</td>
+                </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

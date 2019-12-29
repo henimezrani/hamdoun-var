@@ -1,0 +1,94 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">{{getTitle()}}</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item">
+                    <ul class="nav pull-right">
+                        <!--Notification start-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                               Notifications
+                            </a>
+                        <!--    <ul class="dropdown-menu dropdown-menu-right drop-not" aria-labelledby="navbarDropdownMenuLink">
+                                <h6 class="dropdown-header">Notifications:</h6>
+                                <li class="scroll">
+                                    <a class="dropdown-item" *ngIf="notifications?.length <= 0">
+                                        <div class="text-black mx-auto">Aucune Notification</div>
+                                    </a>
+                                    <ng-container *ngFor="let notification of notifications">
+                                        <a class="dropdown-item hover-notif" *ngIf="notification.link.params" routerLink="{{notification.link?.url}}"
+                                            [queryParams]="{id: notification.link?.paramsValue}">
+
+                                            <div class="justify-content-start" style="display:flex;">
+                                                <div class="" style="padding:10px;">
+                                                    <div>
+                                                        <img style="width:60px;height:60px;" class="rounded-circle" src="{{notification.image}}" />
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="" style="padding:10px;">
+                                                    <div class="card-title font-weight-bold" style="color:black;"><b>{{notification.title}}</b></div>
+                                                    <div class="" style="color:#6c757d!important">{{notification.message}}</div>
+                                                    <div class="card-text text-info">{{timeAgo(notification.createdAt)}}</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item hover-notif" style="background:white;" *ngIf="!notification.link.params" routerLink="{{notification.link?.url}}"
+                                        [queryParams]="{id: notification.link?.paramsValue}">>
+
+                                            <div class="justify-content-start" style="display:flex;">
+                                                <div class="" style="padding:10px;">
+                                                    <div>
+                                                        <img style="width:60px;height:60px;" class="rounded-circle" src="{{notification.image}}" />
+                                                    </div>
+                                                   
+                                                </div>
+                                                <div class="" style="padding:10px;">
+                                                    <div class="card-title font-weight-bold" style="color:black;"><b>{{notification.title}}</b></div>
+                                                    <div class="" style="color:#6c757d!important">{{notification.message}}</div>
+                                                    <div class="card-text text-info">{{timeAgo(notification.createdAt)}}</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </ng-container>
+                                </li>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item hover-notif" [routerLink]="['/client/notifications']">
+                                    <div class="text-primary mx-auto">Voir Tout</div>
+                                </a>
+                            </ul>-->
+
+                        </li>
+                        <!--Notification end-->
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</nav>
+<!--<ul class="navbar-nav ul-drop ml-auto" >
+               
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-globe"></i>
+                        <b class="caret"></b>
+                        <span class="notification hidden-sm hidden-xs">5</span>
+                        <p class="hidden-lg hidden-md">
+                            5 Notifications
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Notification 1</a></li>
+                        <li><a href="#">Notification 2</a></li>
+                        <li><a href="#">Notification 3</a></li>
+                        <li><a href="#">Notification 4</a></li>
+                        <li><a href="#">Another notification</a></li>
+                    </ul>
+                </li>
+                
+            </ul>-->

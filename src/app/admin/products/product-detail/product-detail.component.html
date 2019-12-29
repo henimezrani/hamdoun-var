@@ -1,0 +1,42 @@
+<!-- dialog-box.component.html -->
+<h1 mat-dialog-title>Action : <strong>{{action}}</strong></h1>
+<div mat-dialog-content>
+  <div *ngIf="action != 'Delete'; else elseTemplate">
+  <div class="form-group input-group" >
+      <div class="input-group-prepend">
+          <span class="input-group-text"> Product Image
+          </span>
+      </div>
+      <input type="file" (change)="uploadFile($event)">
+    
+    </div>
+  <mat-form-field class="form-group input-group" >
+      <div class="input-group-prepend">
+          <span class="input-group-text"> Product Name
+          </span>
+      </div>
+    <input matInput class="form-control"  matInput [(ngModel)]="local_data.name">
+  </mat-form-field>
+  <mat-form-field class="form-group input-group">
+      <div class="input-group-prepend">
+          <span class="input-group-text"> Product Quantité
+          </span>
+      </div>
+    <input matInput class="form-control"  matInput [(ngModel)]="local_data.qteStock">
+  </mat-form-field>
+  <mat-form-field class="form-group input-group">
+      <div class="input-group-prepend">
+          <span class="input-group-text"> Product Prix unitaire
+          </span>
+      </div>
+    <input matInput class="form-control"  matInput [(ngModel)]="local_data.prix_u">
+  </mat-form-field>
+</div>
+  <ng-template #elseTemplate>
+    Sure to delete <b>{{local_data.name}}</b>?
+  </ng-template>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>

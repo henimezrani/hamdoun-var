@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="row info-holder">
+    <div class="col-2 text-info">{{user.command_no}} Command</div>
+    <div class="col-3 text-info">{{user.fname}} {{user.lname}}</div>
+    <div class="col-2 text-info">{{user.email}}</div>
+    <div class="col-2 text-info">{{user.phone_number}}</div>
+    <div class="col-3 text-info">  {{command.client_exact_adress}}</div>
+  </div>
+ 
+  <div class="row" *ngIf="isPromotion">
+      Promotion Code : {{command.promotion_code}}
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-md-offset-1">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Total</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td class="col-sm-8 col-md-6">
+              <div class="media">
+                <a class="thumbnail pull-left" href="#"> <img class="media-object" src="{{product.prod_image_url}}"
+                    style="width: 72px; height: 72px;"> </a>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="#">{{product.prod_name}}</a></h4>
+                  
+                  
+                </div>
+              </div>
+            </td>
+
+
+            <td class="col-sm-1 col-md-1" style="text-align: center">
+              <input type="text" class="form-control" id="exampleInputEmail1" value="{{product.prod_qte}}">
+            </td>
+            <td class="col-sm-1 col-md-1 text-center"><strong>{{product.prod_unit_price}} DT</strong></td>
+            <td class="col-sm-1 col-md-1 text-center"><strong>{{product.prod_unit_price*product.prod_qte}} DT</strong></td>
+            <td class="col-sm-1 col-md-1">
+              <button type="button" class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove"></span> IN STOCK
+              </button></td>
+          </tr>
+          <tr>
+            <td>   </td>
+            <td>   </td>
+            <td>   </td>
+            <td>
+              <h5>Subtotal</h5>
+            </td>
+            <td class="text-right">
+              <h5><strong>{{command.total}} DT</strong></h5>
+            </td>
+          </tr>
+          <tr>
+            <td>   </td>
+            <td>   </td>
+            <td>   </td>
+            <td>
+              <h5>Estimated shipping</h5>
+            </td>
+            <td class="text-right">
+              <h5><strong>4 DT</strong></h5>
+            </td>
+          </tr>
+          <tr>
+            <td>   </td>
+            <td>   </td>
+            <td>   </td>
+            <td>
+              <h3>Total</h3>
+            </td>
+            <td class="text-right">
+              <h3><strong>{{command.total + 4000}} DT</strong></h3>
+            </td>
+          </tr>
+          <tr>
+            <td>   </td>
+            <td>   </td>
+            <td>   </td>
+            <td>
+              <button type="button" class="btn btn-default" (click)="cancelCommand()">
+                <span class="glyphicon glyphicon-shopping-cart"></span> Cancel Command
+              </button></td>
+            <td>
+              <button type="button" class="btn btn-success" (click)="delieverCommand()">
+                Deliever <span class="glyphicon glyphicon-play"></span>
+              </button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

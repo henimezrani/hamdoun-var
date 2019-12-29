@@ -1,0 +1,78 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Ajouter utilisateur</h4>
+            <p class="card-category">New user</p>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="email" style="padding-right:5px;">Email</label>
+                  <input type="email" name="email" placeholder="email" [(ngModel)]="email">
+
+                </div>
+                <div class="col-md-4">
+                  <label for="password" style="padding-right:5px;">Password</label>
+                  <input type="password" name="password" placeholder="password" [(ngModel)]="password">
+                </div>
+                <div class="col-md-4">
+
+                  <label for="admin">User Role</label><br />
+                  <div class="row">
+                    <input  type="checkbox" class="example-margin" [checked]="admin" name="admin" (change)="admin = !admin" /><span >Admin</span>
+                  </div>
+                  <div class="row">
+                    <input type="checkbox" class="example-margin" [checked]="!admin" name="delivery" (change)="admin = !admin" /><span>Delivery</span>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <button *ngIf="!isUpdate" mat-raised-button type="submit" (click)="addUser()" class="btn btn-danger pull-right">Add
+                User</button>
+              <button *ngIf="isUpdate" mat-raised-button type="submit" (click)="updateUser()" class="btn btn-danger pull-right">Update
+                User</button>
+              <button *ngIf="isUpdate" mat-raised-button (click)="deleteUser()" class="btn btn-danger pull-right">Delete
+                User</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="card-title">Users list</h4>
+            <p class="card-category">{{users.length}} Users</p>
+          </div>
+          <div class="content table-responsive table-full-width">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of users;let i=index" style="cursor:pointer;" (click)="item=row;setUser()">
+                  <td>{{row.row_id}}</td>
+                  <td>{{row.email}}</td>
+                 <td>{{row.type}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.card-title{
+    font-weight: 600;
+   }
+   .card-category{
+       font-weight: 600;
+   }
+   ::ng-deep .table > thead > tr > th {
+       border-bottom-width: 1px;
+       font-size: 14px;
+       text-transform: uppercase;
+       color: black;
+       font-weight: 600;
+       padding-bottom: 5px;
+   }
+   .example-margin{
+       margin-top: 5px;
+   }

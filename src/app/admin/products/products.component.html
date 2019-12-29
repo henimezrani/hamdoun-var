@@ -1,0 +1,355 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="card-title">Products list</h4>
+            <p class="card-category"> Products</p>
+
+          </div>
+          <div class="container text-center">
+            <div class="row" style="margin:2%;justify-content: space-between">
+              <select class="ng-pristine ng-valid" (change)="onChange($event)">
+                <optgroup *ngFor="let cat of cats" label="{{cat.cat_name}}">
+                  <!--<option value="{{cat.cat_name}}" style="font-weight: bold;">{{cat.cat_name}}</option>-->
+                  <option *ngFor="let subcat of cat.subcats" value="{{subcat}}">{{subcat}}</option>
+
+                </optgroup>
+              </select>
+
+              <button mat-button mat-flat-button style="margin-left: 40%;" color="primary" data-toggle="modal"
+                data-target="#addCatModal">Add
+                Categorie</button>
+              <button mat-button mat-flat-button style="margin-right: 15%;" color="primary" data-toggle="modal"
+                data-target="#addTripModal">Add
+                Product</button>
+            </div>
+            <table mat-table [dataSource]="sortArray(allProducts)" #mytable class="my-table mat-elevation-z8 col-md-12">
+
+              <!--- Note that these columns can be defined in any order.
+                              The actual rendered columns are set as a property on the row definition" -->
+
+              <!-- Id Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID. </th>
+                <td mat-cell *matCellDef="let element"> {{element.data.id}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.data.name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="prix_u">
+                <th mat-header-cell *matHeaderCellDef> Prix u </th>
+                <td mat-cell *matCellDef="let element"> {{element.data.prix_u}} </td>
+              </ng-container>
+              <ng-container matColumnDef="qteStock">
+                <th mat-header-cell *matHeaderCellDef> Qte Stock </th>
+                <td mat-cell *matCellDef="let element"> {{element.data.qteStock}} </td>
+              </ng-container>
+
+              <!-- Action Column -->
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element" class="action-link">
+                  <Button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editTripModal"
+                    (click)="editProduct=element">Edit</Button>
+                  |
+                  <Button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delTripModal"
+                    (click)="delProduct=element">Delete</Button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--MODAL EDIT-->
+<div class="modal fade" id="editTripModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header card-header-danger">
+                <h4 class="card-title">Edit Product</h4>
+                <p class="card-category">{{editProduct.data.name}}</p>
+              </div>
+              <div class="card-body">
+                <form>
+                  <div class="row">
+                    <div class="form-group col-7">
+                      <label for="exampleInputEmail1">ID :</label>
+                      <input type="text" placeholder="ID" name="id" [(ngModel)]="editProduct.data.id"
+                        class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                    </div>
+
+                    <div class="form-group col-7">
+                      <label for="exampleInputEmail1">Name :</label>
+                      <input type="text" placeholder="name" name="name" [(ngModel)]="editProduct.data.name"
+                        class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                    </div>
+                  </div>
+                  
+
+                  <div class="col-md-5">
+                    <label for="cat">Categorie</label><br />
+                    <select class="ng-pristine ng-valid" name="cat" (change)="onChangeEdit($event)"
+                      [(ngModel)]="subEditCat">
+                      <optgroup *ngFor="let cat of cats" label="{{cat.cat_name}}">
+                        <option *ngFor="let subcat of cat.subcats" value="{{subcat}}">{{subcat}}</option>
+                      </optgroup>
+                    </select>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input type="file" name="file" id="editfile" class="inputfile"
+                        (change)="uploadFileEdit($event)" />
+                      <label for="file">Image source</label>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="active">Active :</label><br />
+                      <input type="checkbox" class="example-margin" [checked]="editProduct.data.isActive" name="admin"
+                        (change)="editProduct.data.isActive = !editProduct.data.isActive" />
+                      <span *ngIf="editProduct.data.isActive">Active</span><span *ngIf="!editProduct.data.isActive">Not
+                        Active</span>
+                    </div>
+                  </div>
+
+                  
+
+
+                  <div class="row">
+                    <div class="form-group col-7">
+                      <label for="exampleInputEmail1">Prix :</label>
+                      <input type="number" placeholder="0" name="prix"   [(ngModel)]="editProduct.data.prix_u"
+                        class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                    </div>
+
+                    <div class="form-group col-7">
+                      <label for="exampleInputEmail1">Quantité Stock :</label>
+                      <input type="number" placeholder="0" name="qte"  [(ngModel)]="editProduct.data.qteStock"
+                        class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                    </div>
+
+                  </div>
+                  <div class="clearfix"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary2" (click)="updateProduct()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addTripModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header card-header-danger">
+                <h4 class="card-title">Add Product</h4>
+                <p class="card-category">Nouveau Produit</p>
+              </div>
+              <div class="card-body">
+                <form>
+
+                  <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" placeholder="ID" name="id" [(ngModel)]="newProduct.id"
+                      aria-describedby="ID">
+                    <small id="emailHelp" class="form-text text-muted">Product ID</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" placeholder="name" name="name" [(ngModel)]="newProduct.name"
+                      aria-describedby="ID">
+                    <small id="emailHelp" class="form-text text-muted">Product Name</small>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="cat">Categorie</label>
+                    <select class="form-control" name="cat" (change)="onChangeAdd($event)">
+                      <optgroup *ngFor="let cat of cats" label="{{cat.cat_name}}">
+                        <option *ngFor="let subcat of cat.subcats" value="{{subcat}}">{{subcat}}</option>
+                      </optgroup>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="file">Image source</label>
+                    <input class="form-control-file" type="file" name="file" id="file" (change)="uploadFile($event)">
+                  </div>
+                  <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="newProduct.isActive"
+                      name="admin" (change)="newProduct.isActive = !newProduct.isActive">
+                    <label *ngIf="newProduct.isActive" class="form-check-label" for="admin">Active</label>
+                    <label *ngIf="!newProduct.isActive" class="form-check-label" for="admin">Not Active</label>
+                  </div>
+
+
+
+                  <div class="form-group">
+                    <label for="prix">Prix</label>
+                    <input type="number" class="form-control" placeholder="0" name="prix"
+                      [(ngModel)]="newProduct.prix_u" aria-describedby="ID">
+                    <small id="emailHelp" class="form-text text-muted">Product Price</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="qte">Quantité Stock</label>
+                    <input type="number" class="form-control" placeholder="0" name="qte"
+                      [(ngModel)]="newProduct.qteStock" aria-describedby="ID">
+                    <small id="emailHelp" class="form-text text-muted">Product Quantité</small>
+                  </div>
+
+
+                  <div class="clearfix"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addNewProduct()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="delTripModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header card-header-danger">
+                <h4 class="card-title">Delete Product</h4>
+                <p class="card-category">You sure to delete {{delProduct.data.name}} ?</p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" (click)="deleteProduct()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="addCatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Categorie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header card-header-danger">
+                <h4 class="card-title">Add Categorie</h4>
+                <p class="card-category">Nouvelle Categorie</p>
+              </div>
+              <div class="card-body">
+                <form>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="text" placeholder="name" name="name" [(ngModel)]="newCategorie.name"
+                      class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlFile1">Image Source</label>
+                    <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1"
+                      (change)="uploadFileCategory($event)">
+                  </div>
+
+                  <div style="margin-right:2%;margin-bottom:5px;margin-top:2px"
+                    *ngFor="let caty of newCategorie.subcats;let i = index; let f = first; let l = last">
+
+                    <input type="text" id="category" name="category" [(ngModel)]="caty" placeholder="Sub category"
+                      required />
+                    <button color="primary" *ngIf="l" (click)="addSub()">
+                      Add
+                    </button>
+                    <button color="warn" *ngIf="!f" (click)="removeSub(i)">
+                      Remove
+                    </button>
+                  </div>
+                  <div style="margin-top:2%" *ngIf="!newCategorie.subcats">
+
+                    <input type="text" id="category" name="category" [(ngModel)]="newCaty" placeholder="Sub category"
+                      required />
+                    <button color="primary" (click)="addSub()">
+                      Add
+                    </button>
+
+                  </div>
+
+                  <div class="clearfix"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addNewProduct()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

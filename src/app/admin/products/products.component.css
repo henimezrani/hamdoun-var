@@ -1,0 +1,80 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+/*.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile + label {
+    font-size: 0.8em;
+    padding: 8px;
+    font-weight: 700;
+    color: white;
+    background-color: dimgrey;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+}
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}*/
+.card-title{
+    font-weight: 600;
+   }
+   .card-category{
+       font-weight: 600;
+   }
+   ::ng-deep .table > thead > tr > th {
+       border-bottom-width: 1px;
+       font-size: 14px;
+       text-transform: uppercase;
+       color: black;
+       font-weight: 600;
+       padding-bottom: 5px;
+   }
+   .example-margin{
+       margin-top: 5px;
+   }
+
+
+::ng-deep .modal-dialog {
+    max-width: 80%;
+    margin: 1.75rem auto;
+}
+
+::ng-deep .mat-fab.mat-primary,.mat-flat-button.mat-primary, .mat-mini-fab.mat-primary,
+.mat-raised-button.mat-primary{
+
+    background-color: #ff7676 ;
+    } 
+    ::ng-deep .mat-button.mat-primary,.mat-icon-button.mat-primary,.mat-stroked-button.mat-primary{
+     color: white !important ;
+     font-weight : bold 
+    }
+
+    ::ng-deep .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle{
+
+
+
+        background-color:transparent;
+        color: #ff2727;
+        border-color : #ff2727; }
+        ::ng-deep .btn.focus, .btn:focus{
+            box-shadow: 0px 0px 0px 0.2rem rgba(255,255,255,0);
+        }
+         .btn-primary2 {
+            border-color: #0080ff;
+            color:#0080ff;
+        }
+        .btn-secondary {
+            border-color:#ff2727 !important;
+            color:#ff2727 !important;
+        }
+       
